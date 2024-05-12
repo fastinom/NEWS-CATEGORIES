@@ -42,7 +42,25 @@ def classify_news(title, summary):
 def main():
     """Streamlit App for displaying categorized news stories."""
     st.title("News Categorization and Clustering App")
-    st.markdown("## News Stories from CNN categorized into Business, Politics, Arts/Culture/Celebrities, and Sports")
+    st.markdown("""
+    ## News Stories from CNN categorized into Business, Politics, Arts/Culture/Celebrities, and Sports
+    """)
+    
+    # Applying CSS styles for color and padding
+    st.markdown("""
+    <style>
+    .news-item {
+        color: #4a4a4a;
+        background-color: #f4f4f2;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0px;
+    }
+    .link {
+        color: #2986cc;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
     # Sidebar for category selection
     category_choice = st.sidebar.selectbox("Choose Category", ['Business', 'Politics', 'Arts/Culture/Celebrities', 'Sports', 'Uncategorized'])
@@ -50,9 +68,13 @@ def main():
     
     # Display filtered news stories
     for index, row in filtered_data.iterrows():
-        st.write(f"**{row['title']}**")
-        st.write(f"{row['summary']}")
-        st.markdown(f"[Read more]({row['link']})")
+        st.markdown(f"""
+        <div class="news-item">
+            <h3>{row['title']}</h3>
+            <p>{row['summary']}</p>
+            <a href="{row['link']}" class="link">Read more</a>
+        </div>
+        """, unsafe_allow_html=True)
 
 # Load data and run the app
 news_df = fetch_news()
