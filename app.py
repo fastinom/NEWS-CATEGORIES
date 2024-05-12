@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 
 # Fetch and parse the RSS feed
 def fetch_news():
-    url = 'https://www.herald.co.zw/'
+    url = 'http://rss.cnn.com/rss/cnn_topstories.rss'
     feed = feedparser.parse(url)
     news_list = []
     for entry in feed.entries:
