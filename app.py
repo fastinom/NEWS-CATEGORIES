@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 
 # Fetch and parse the RSS feed
 def fetch_news():
-    url = 'http://rss.cnn.com/rss/cnn_topstories.rss'
+    url = 'https://www.herald.co.zw/'
     feed = feedparser.parse(url)
     news_list = []
     for entry in feed.entries:
@@ -37,7 +37,7 @@ news_df = fetch_news()
 # Streamlit App
 def main():
     st.title("News Categorization and Clustering App")
-    st.subheader("News Stories from CNN categorized into Business, Politics, Arts/Culture/Celebrities, and Sports")
+    st.markdown("## News Stories from CNN categorized into Business, Politics, Arts/Culture/Celebrities, and Sports")
 
     # Display categories
     category_choice = st.sidebar.selectbox("Choose Category", ['Business', 'Politics', 'Arts/Culture/Celebrities', 'Sports', 'Uncategorized'])
