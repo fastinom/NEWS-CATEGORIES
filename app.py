@@ -45,19 +45,29 @@ def main():
     st.markdown("""
     ## News Stories from CNN categorized into Business, Politics, Arts/Culture/Celebrities, and Sports
     """)
+
+    # Image dictionary for categories
+    category_images = {
+        'Business': 'https://path_to_business_image.jpg',
+        'Politics': 'https://path_to_politics_image.jpg',
+        'Arts/Culture/Celebrities': 'https://path_to_arts_image.jpg',
+        'Sports': 'https://path_to_sports_image.jpg',
+        'Uncategorized': 'https://path_to_uncategorized_image.jpg'
+    }
     
-    # Applying CSS styles for color and padding
+    # CSS for vibrant colors and styles
     st.markdown("""
     <style>
     .news-item {
-        color: #4a4a4a;
-        background-color: #f4f4f2;
-        padding: 10px;
+        color: #ffffff;  # white text
+        background-color: #3D6DCC;  # blue background
+        padding: 15px;
         border-radius: 10px;
         margin: 10px 0px;
+        box-shadow: 2px 2px 5px grey;
     }
     .link {
-        color: #2986cc;
+        color: #FFD700;  # golden link
     }
     </style>
     """, unsafe_allow_html=True)
@@ -66,10 +76,12 @@ def main():
     category_choice = st.sidebar.selectbox("Choose Category", ['Business', 'Politics', 'Arts/Culture/Celebrities', 'Sports', 'Uncategorized'])
     filtered_data = news_df[news_df['category'] == category_choice]
     
-    # Display filtered news stories
+    # Display filtered news stories with category images
     for index, row in filtered_data.iterrows():
+        image_url = category_images.get(row['category'], 'https://path_to_default_image.jpg')
         st.markdown(f"""
         <div class="news-item">
+            <img src="{image_url}" alt="Category Image" style="float:left; width:100px; height:100px; margin-right:20px; border-radius:50%;">
             <h3>{row['title']}</h3>
             <p>{row['summary']}</p>
             <a href="{row['link']}" class="link">Read more</a>
